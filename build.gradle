@@ -1,0 +1,16 @@
+plugins { id 'base' }
+allprojects {
+  group = 'gg.kembel.dui.studio'; version = '0.1.0-SNAPSHOT'
+  repositories { mavenCentral() }
+}
+subprojects {
+  apply plugin: 'java-library'
+  apply plugin: 'maven-publish'
+  java { sourceCompatibility = JavaVersion.VERSION_25; targetCompatibility = JavaVersion.VERSION_25; withSourcesJar() }
+  tasks.withType(JavaCompile).configureEach { options.release = 25 }
+  dependencies { testImplementation platform('org.junit:junit-bom:5.14.0'); testImplementation 'org.junit.jupiter:junit-jupiter'; testRuntimeOnly 'org.junit.platform:junit-platform-launcher' }
+  test { useJUnitPlatform() }
+  publishing { publications { mavenJava(MavenPublication) { from components.java } } }
+}
+tasks.named('check') { dependsOn subprojects.collect { it.tasks.named('check') } }
+tasks.named('build') { dependsOn subprojects.collect { it.tasks.named('build') } }

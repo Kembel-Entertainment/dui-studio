@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "dui studio",
+  "version": "0.1.0",
+  "identifier": "gg.kembel.dui.studio",
+  "build": {
+    "beforeDevCommand": "pnpm run runtime && pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm run runtime && pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "dui studio",
+        "width": 1540,
+        "height": 960,
+        "minWidth": 1000,
+        "minHeight": 680,
+        "backgroundColor": "#101014"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "resources": ["resources/engine.jar", "resources/jre/**/*"],
+    "category": "DeveloperTool",
+    "shortDescription": "Visual authoring and preview for DUI projects"
+  }
+}

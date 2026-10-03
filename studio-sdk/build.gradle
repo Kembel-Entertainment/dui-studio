@@ -1,0 +1,4 @@
+dependencies {
+  api 'gg.kembel.dui:dui-core:0.2.0-SNAPSHOT'
+  api 'gg.kembel.dui:dui-pack:0.2.0-SNAPSHOT'
+}

@@ -1,0 +1,4 @@
+rootProject.name = 'dui-studio'
+include 'studio-sdk', 'studio-engine'
+if (providers.gradleProperty('duiSource').isPresent()) includeBuild(providers.gradleProperty('duiSource').get())
+else if (file('../dui').isDirectory()) includeBuild('../dui')

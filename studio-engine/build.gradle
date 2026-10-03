@@ -1,0 +1,21 @@
+plugins { id 'application' }
+dependencies {
+  implementation project(':studio-sdk')
+  implementation 'com.google.code.gson:gson:2.13.2'
+  implementation 'org.joml:joml:1.10.8'
+  for (module in ['lwjgl','lwjgl-glfw','lwjgl-opengl']) {
+    implementation "org.lwjgl:${module}:3.4.1"
+    for (platform in ['natives-linux','natives-macos','natives-macos-arm64','natives-windows'])
+      runtimeOnly "org.lwjgl:${module}:3.4.1:${platform}"
+  }
+}
+application { mainClass = 'gg.kembel.dui.studio.engine.Main' }
+tasks.register('engineJar', Jar) {
+  dependsOn classes, configurations.runtimeClasspath
+  archiveFileName = 'studio-engine.jar'
+  manifest { attributes 'Main-Class': application.mainClass.get() }
+  from sourceSets.main.output
+  from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+  exclude 'META-INF/*.SF','META-INF/*.RSA','META-INF/*.DSA','module-info.class'
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
