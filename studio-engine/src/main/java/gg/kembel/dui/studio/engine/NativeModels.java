@@ -142,15 +142,16 @@ final class NativeModels {
           else if (type.equals("minecraft:constant")) tint = t.get("value").getAsInt();
           else throw new IllegalArgumentException("Unsupported item tint " + type);
         }
+        String shadeDirection = e.has("shade_direction_override")
+            ? e.get("shade_direction_override").getAsString() : face.getKey();
         float shade =
-            switch (face.getKey()) {
+            switch (shadeDirection) {
               case "up" -> 1;
               case "down" -> .5f;
               case "north", "south" -> .8f;
               default -> .6f;
             };
-        if ((e.has("shade") && !e.get("shade").getAsBoolean())
-            || (model.has("gui_light") && model.get("gui_light").getAsString().equals("front")))
+        if (model.has("gui_light") && model.get("gui_light").getAsString().equals("front"))
           shade = 1;
         tint = shade(tint, shade);
         var vertices = new ArrayList<Float>();

@@ -1,4 +1,6 @@
 {
   "repository": "Kembel-Entertainment/dui",
-  "revision": "4d5df3fd47178a36a1f01bb78fdcd531a9c04e1c"
+  "revision": "dd5ba0616b1eb0ab63d6574dc8090b9c2c79b65e",
+  "libraryVersion": "0.3.0-SNAPSHOT",
+  "minecraft": "26.3"
 }

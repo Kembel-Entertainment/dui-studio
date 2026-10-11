@@ -27,10 +27,10 @@ pnpm setup:dui
 pnpm desktop
 ```
 
-`dui-version.json` pins the DUI source revision. `setup:dui` downloads it into ignored `.cache/dui`. An existing sibling `../dui` checkout takes precedence; set `DUI_SOURCE` explicitly to use another checkout. The desktop command automatically builds the Java renderer and local runtime before starting Tauri. Generated resources are ignored by Git.
+`dui-version.json` pins the reviewed DUI 0.3 / Minecraft 26.3 source revision. `setup:dui` downloads that exact revision into ignored `.cache/dui`. For local development, keep a DUI 0.3 checkout beside Studio as `../dui`, or set `DUI_SOURCE` to its path before `setup:dui` and the desktop command; the local source takes precedence. The desktop command automatically builds the Java renderer and local runtime before starting Tauri. Generated resources are ignored by Git.
 
 1. Open a trusted project folder; `examples/starter` works without a custom adapter.
-2. Optionally select **your own local Minecraft Java 26.2 client JAR** for fonts and models.
+2. Optionally select **your own local Minecraft Java 26.3 client JAR** for fonts and models.
 3. Select a document and fixture, edit, then save.
 
 Minecraft assets, consumer projects, ROMs and videos are not included. Java adapters are executable local code: only use adapters you trust. Studio does not upload project files or send telemetry. See [security and local data](SECURITY.md).
@@ -57,6 +57,6 @@ cargo test --locked --manifest-path src-tauri/Cargo.toml
 python3 scripts/engine-test.py
 ```
 
-The engine check exercises the real GPU protocol against the starter. Add `--project /path/to/project --minecraft-jar /path/to/26.2-client.jar --all` to check consumer fixtures. Browser tests simulate Tauri IPC; native desktop review is separate.
+The engine check exercises the real GPU protocol against the starter. Add `--project /path/to/project --minecraft-jar /path/to/26.3-client.jar --all` to check consumer fixtures. Browser tests simulate Tauri IPC; native desktop review is separate.
 
 See [contributing](CONTRIBUTING.md). Studio uses the same [MIT license](LICENSE) as DUI and dui-demo; dependencies retain their [own licenses](THIRD_PARTY_NOTICES.md). This is an independent project, not an official Minecraft product.

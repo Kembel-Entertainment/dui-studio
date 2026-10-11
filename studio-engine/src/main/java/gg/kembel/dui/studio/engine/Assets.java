@@ -34,7 +34,7 @@ final class Assets implements AutoCloseable {
               .getAsJsonObject()
               .get("id")
               .getAsString()
-              .equals("26.2")) throw new IllegalArgumentException("Select Minecraft 26.2 assets");
+              .equals("26.3")) throw new IllegalArgumentException("Select Minecraft 26.3 assets");
       loadFont("assets/minecraft/font/include/default.json");
     }
     widths.put(" ", 4);

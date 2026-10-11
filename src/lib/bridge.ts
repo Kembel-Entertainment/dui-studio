@@ -39,7 +39,7 @@ export async function chooseDirectory() {
 export async function chooseMinecraft() {
   return (await open({
     multiple: false,
-    title: 'Select your Minecraft 26.2 client JAR',
+    title: 'Select your Minecraft 26.3 client JAR',
     filters: [{ name: 'Minecraft assets', extensions: ['jar'] }],
   })) as string | null;
 }

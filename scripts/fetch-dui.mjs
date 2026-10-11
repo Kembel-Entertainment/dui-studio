@@ -3,6 +3,19 @@ import { spawnSync } from 'node:child_process';
 import { join, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const pin = JSON.parse(readFileSync(join(root, 'dui-version.json'), 'utf8'));
+const local =
+  process.env.DUI_SOURCE ||
+  (existsSync(join(root, '../dui/settings.gradle')) ? join(root, '../dui') : null);
+if (local) {
+  if (!existsSync(join(resolve(local), 'dui-runtime/build.gradle')))
+    throw new Error('DUI_SOURCE must point to the DUI 0.3 / Minecraft 26.3 checkout.');
+  console.log(`Using local DUI source: ${resolve(local)}.`);
+  process.exit(0);
+}
+if (pin.revision === null)
+  throw new Error(
+    'The DUI 0.3 / 26.3 port has not been committed and pinned yet. Use a sibling ../dui checkout or set DUI_SOURCE.',
+  );
 if (
   !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(pin.repository) ||
   !/^[0-9a-f]{40}$/.test(pin.revision)

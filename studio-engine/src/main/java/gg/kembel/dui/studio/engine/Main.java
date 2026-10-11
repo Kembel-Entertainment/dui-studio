@@ -508,8 +508,8 @@ public final class Main implements AutoCloseable {
           g.drawString(Character.toString(cp), x, p.y() + 7);
           if (assets.vanilla == null
               && !warnings.contains(
-                  "Select a local Minecraft 26.2 JAR for native font and item fidelity."))
-            warnings.add("Select a local Minecraft 26.2 JAR for native font and item fidelity.");
+                  "Select a local Minecraft 26.3 JAR for native font and item fidelity."))
+            warnings.add("Select a local Minecraft 26.3 JAR for native font and item fidelity.");
         }
         x += provider.environment().font().width(Character.toString(cp));
       }

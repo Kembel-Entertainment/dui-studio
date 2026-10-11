@@ -27,6 +27,10 @@ if (!existsSync(join(source, 'settings.gradle'))) {
   if (process.env.DUI_SOURCE) throw new Error('DUI_SOURCE must point to a DUI checkout.');
   run(process.execPath, [join(root, 'scripts/fetch-dui.mjs')]);
 }
+if (!existsSync(join(source, 'dui-runtime/build.gradle')))
+  throw new Error(
+    'Studio requires the DUI 0.3 / Minecraft 26.3 source. Set DUI_SOURCE to the current checkout.',
+  );
 // Calling the wrapper through Java avoids shell/path interpolation on Windows.
 run(java, [
   '-classpath',

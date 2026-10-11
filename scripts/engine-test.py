@@ -14,11 +14,13 @@ def main():
     parser.add_argument('--project', type=pathlib.Path, default=ROOT / 'examples/starter')
     parser.add_argument('--minecraft-jar', type=pathlib.Path)
     parser.add_argument('--all', action='store_true')
+    parser.add_argument('--java', type=pathlib.Path, help='Override the packaged Java runtime')
+    parser.add_argument('--engine-jar', type=pathlib.Path, help='Override the packaged engine JAR')
     args = parser.parse_args()
-    java = ROOT / 'src-tauri/resources/jre/bin' / ('java.exe' if os.name == 'nt' else 'java')
+    java = args.java or ROOT / 'src-tauri/resources/jre/bin' / ('java.exe' if os.name == 'nt' else 'java')
     command = [str(java), '--enable-native-access=ALL-UNNAMED', '-Djava.awt.headless=true']
     if sys.platform == 'darwin': command += ['-XstartOnFirstThread']
-    command += ['-jar', str(ROOT / 'src-tauri/resources/engine.jar')]
+    command += ['-jar', str(args.engine_jar or ROOT / 'src-tauri/resources/engine.jar')]
     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     counter = 0
     def request(method, params):
@@ -56,7 +58,7 @@ def main():
                 (output / (document.stem + '-' + fixture['id'] + '.json')).write_text(json.dumps(meta, indent=2))
                 warnings = meta['warnings']
                 if args.minecraft_jar is None:
-                    warnings = [w for w in warnings if w != 'Select a local Minecraft 26.2 JAR for native font and item fidelity.']
+                    warnings = [w for w in warnings if w != 'Select a local Minecraft 26.3 JAR for native font and item fidelity.']
                 assert not warnings, (relative, fixture['id'], warnings)
                 total += 1
                 print(relative, fixture['id'], meta['width'], meta['height'])

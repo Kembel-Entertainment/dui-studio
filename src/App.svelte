@@ -579,7 +579,7 @@
     <div class="appbar-actions">
       <button
         onclick={minecraft}
-        title="Use your local Minecraft 26.2 assets"
+        title="Use your local Minecraft 26.3 assets"
         class:configured={!!jar}>◇ Minecraft assets</button
       ><button onclick={() => openProject()} disabled={!bridge.desktop || busy || loading || saving}
         >Open project <kbd>⌘O</kbd></button
@@ -974,7 +974,7 @@
             <dt>Adapter</dt>
             <dd>{project.profile.adapter}</dd>
             <dt>Minecraft assets</dt>
-            <dd>{project.profile.minecraftAssets ? 'Local 26.2 JAR' : 'Not configured'}</dd>
+            <dd>{project.profile.minecraftAssets ? 'Local 26.3 JAR' : 'Not configured'}</dd>
           </dl>
           <div class="section-label">BUDGET REPORT</div>
           <pre class="fixture-values">{JSON.stringify(preview?.report ?? {}, null, 2)}</pre>
